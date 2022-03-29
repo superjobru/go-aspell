@@ -75,7 +75,6 @@ func NewSpeller(options map[string]string) (Speller, error) {
 	if C.aspell_error_number(probErr) != 0 {
 		msg := C.aspell_error_message(probErr)
 		err := errors.New(C.GoString(msg))
-		C.free(unsafe.Pointer(msg))
 		C.delete_aspell_can_have_error(probErr)
 		return s, err
 	}

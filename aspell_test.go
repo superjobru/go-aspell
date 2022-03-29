@@ -43,6 +43,21 @@ func TestBasic(t *testing.T) {
 	}
 }
 
+// This is a test for error-handling code in contructor.
+func TestConstructorError(t *testing.T) {
+	opts := map[string]string{
+		"lang": "qwerty",
+	}
+	_, err := NewSpeller(opts)
+	if err == nil {
+		t.Errorf("Expected an error")
+	}
+	expectedErr := "No word lists can be found for the language \"qwerty\"."
+	if err.Error() != expectedErr {
+		t.Errorf("Incorrect error '%s', expected '%s'", err, expectedErr)
+	}
+}
+
 // This is a test for the list of suggestions
 func TestSuggestReplace(t *testing.T) {
 	// Initialization
